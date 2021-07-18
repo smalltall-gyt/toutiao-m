@@ -1,13 +1,24 @@
 <template>
-  <div class="my-container">个人中心</div>
+  <div class="my-container">
+    <Header />
+    <GridNav />
+    <CellNav />
+  </div>
 </template>
 
 <script>
-export default {
+import Header from './components/Header.vue'
+import GridNav from './components/GridNav.vue'
+import CellNav from './components/CellNav.vue'
 
+export default {
+  components: {
+    Header,
+    GridNav,
+    CellNav
+  }
 }
 </script>
 
-<style>
-
+<style lang="less">
 </style>

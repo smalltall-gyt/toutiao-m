@@ -61,6 +61,10 @@
         登录</van-button>
       </div>
     </van-form>
+    <div class="tip">
+      <p>登录账户请使用: 17090086870</p>
+      <p>密码请使用: 246810</p>
+    </div>
     <div class="login-footer">
       <span>隐私条款</span>
     </div>
@@ -203,6 +207,13 @@ export default {
     height: 32px;
     line-height: 32px;
     color: rgb(161, 161, 161);
+  }
+  .tip {
+    p {
+      font-size: 12px;
+      color: rgb(146, 146, 146);
+      text-align: center;
+    }
   }
 }
 </style>
