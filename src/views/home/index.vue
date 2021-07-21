@@ -92,18 +92,6 @@ export default {
       color: #333 ;
       font-size: 15px;
     }
-    /deep/ .van-tabs__content {
-      position: fixed;
-      top: 90px;
-      left: 0;
-      right: 0;
-      bottom: 50px;
-      overflow-y: auto;
-    }
-    /deep/ .van-tabs__content .van-tab__pane {
-      width: 100%;
-      height: 100%;
-    }
     /deep/ .van-tab {
       position: relative;
       z-index: 999;
