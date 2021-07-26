@@ -29,5 +29,10 @@ export default [
         component: () => import('@/views/my/index.vue')
       }
     ]
+  },
+  {
+    path: '/search',
+    name: 'search',
+    component: () => import('@/views/search/index.vue')
   }
 ]

@@ -87,8 +87,6 @@ export default {
 
 <style lang="less" scoped>
   .article-list-container {
-    // width: 100%;
-    // height: 100%;
     position: fixed;
     top: 90px;
     left: 0;

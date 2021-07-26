@@ -15,3 +15,23 @@ export async function getArticles (data) {
   })
   return res
 }
+// 获取所有频道
+export async function getAllChannels () {
+  const res = await axios.get('/app/v1_0/channels')
+  return res
+}
+// 添加频道
+export async function addChannel (data) {
+  return await axios({
+    method: 'PATCH',
+    url: '/app/v1_0/user/channels',
+    data
+  })
+}
+// 删除频道
+export async function deleteChannel (id) {
+  return await axios({
+    url: `/app/v1_0/user/channels/${id}`,
+    method: 'DELETE'
+  })
+}
