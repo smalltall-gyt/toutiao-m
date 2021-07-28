@@ -34,5 +34,10 @@ export default [
     path: '/search',
     name: 'search',
     component: () => import('@/views/search/index.vue')
+  },
+  {
+    path: '/article/:art_id',
+    name: 'article',
+    component: () => import('@/views/article/index.vue')
   }
 ]

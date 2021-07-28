@@ -1,15 +1,17 @@
 <template>
   <div class="article-item-container">
     <template v-if="article.cover.type === 0">
-      <h3 class="article-title">{{ article.title }}</h3>
-      <div class="article-info">
-        <span class="article-aut">{{ article.aut_name }}</span>
-        <span class="article-comment">{{ article.comm_count }}评论</span>
-        <span class="article-date">{{ article.pubdate | formatRelativeTime }}</span>
+      <div @click="showDetail">
+        <h3 class="article-title">{{ article.title }}</h3>
+        <div class="article-info">
+          <span class="article-aut">{{ article.aut_name }}</span>
+          <span class="article-comment">{{ article.comm_count }}评论</span>
+          <span class="article-date">{{ article.pubdate | formatRelativeTime }}</span>
+        </div>
       </div>
     </template>
     <template v-else-if="article.cover.type === 1">
-      <div class="type-2">
+      <div class="type-2" @click="showDetail">
         <div class="left">
           <h3 class="article-title van-multi-ellipsis--l3">{{ article.title }}</h3>
           <div class="article-info">
@@ -27,21 +29,23 @@
         </div>
       </div>
     </template>
-    <template v-else-if="article.cover.type === 3">
-      <h3 class="article-title">{{ article.title }}</h3>
-      <div class="images-list">
-        <van-image
+    <template v-else-if="article.cover.type === 3">\
+      <div @click="showDetail">
+        <h3 class="article-title">{{ article.title }}</h3>
+        <div class="images-list">
+          <van-image
             class="article-image image-type-3"
             fit="cover"
             :src="image"
             v-for="(image,index) in article.cover.images"
             :key="index"
           />
-      </div>
-      <div class="article-info">
-        <span class="article-aut">{{ article.aut_name }}</span>
-        <span class="article-comment">{{ article.comm_count }}评论</span>
-        <span class="article-date">{{ article.pubdate | formatRelativeTime }}</span>
+        </div>
+        <div class="article-info">
+          <span class="article-aut">{{ article.aut_name }}</span>
+          <span class="article-comment">{{ article.comm_count }}评论</span>
+          <span class="article-date">{{ article.pubdate | formatRelativeTime }}</span>
+        </div>
       </div>
     </template>
   </div>
@@ -53,6 +57,17 @@ export default {
     article: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    showDetail () {
+      this.$router.push({
+        name: 'article',
+        params: {
+          art_id: this.article.art_id
+        }
+      })
+      console.log(this.article)
     }
   }
 }

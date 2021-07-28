@@ -35,3 +35,7 @@ export async function deleteChannel (id) {
     method: 'DELETE'
   })
 }
+// 获取文章详情
+export async function getArticleDetail (articleId) {
+  return await axios.get(`/app/v1_0/articles/${articleId}`)
+}
