@@ -72,16 +72,17 @@
         class="article-main markdown-body"
         v-html="article.content">
       </div>
+      <CommentList :source="$route.params.art_id" @changeCount="commentsCount = $event"/>
     </div>
     <div class="footer">
-      <van-button round type="default" class="write-comment-btn">写评论</van-button>
+      <van-button round type="default" class="write-comment-btn" @click="isPostShow=true">写评论</van-button>
       <van-icon
         :name="article.attitude === 1 ? 'good-job' : 'good-job-o'"
         :color="article.attitude === 1 ? 'orange' : ''"
         class="icons"
         @click="onLike"
       />
-      <van-icon name="comment-o" class="icons" badge="99+" />
+      <van-icon name="comment-o" class="icons" :badge="commentsCount" />
       <van-icon
         :color="article.is_collected ? 'orange' : ''"
         :name="article.is_collected ? 'star' : 'star-o'"
@@ -90,6 +91,26 @@
       />
       <van-icon name="share-o" class="icons" />
     </div>
+    <!-- 发布评论 -->
+    <van-popup
+      v-model="isPostShow"
+      position="bottom"
+      :style="{height: '20%'}"
+    >
+      <PostComment @success="postCommentSuccess" :target="$route.params.art_id"/>
+    </van-popup>
+    <!-- 评论回复 -->
+    <van-popup
+      v-model="isReplyShow"
+      position="bottom"
+    >
+      <ReplyList
+        v-if="isReplyShow"
+        :replyInfo="replyInfo"
+        @close="isReplyShow=false"
+        @changeReplyNum="changeReplyNum"
+      />
+    </van-popup>
   </div>
 </template>
 
@@ -105,8 +126,16 @@ import {
   deleteLikeArticle
 } from '@/api/article'
 import { ImagePreview, Toast } from 'vant'
+import CommentList from './components/CommentList'
+import PostComment from './components/PostComment'
+import ReplyList from './components/ReplyList'
 
 export default {
+  components: {
+    CommentList,
+    PostComment,
+    ReplyList
+  },
   data () {
     return {
       titleIsShow: false,
@@ -114,17 +143,26 @@ export default {
       imgsArr: [], // 存储文章图片
       isFollowLoading: false,
       isCollectLoading: false,
-      isLikeLoading: false
+      isLikeLoading: false,
+      isPostShow: false, // 发布评论的弹出框是否显示
+      commentsCount: 0, // 评论数量
+      isReplyShow: false,
+      replyInfo: null
     }
   },
   created () {
     this.loadArtile()
   },
+  mounted () {
+    this.$bus.$on('replyClick', (data) => {
+      this.isReplyShow = true
+      this.replyInfo = data
+    })
+  },
   methods: {
     async loadArtile () {
       const res = await getArticleDetail(this.$route.params.art_id)
       this.article = res.data
-      console.log(res)
       this.$nextTick(() => {
         const { articleMain } = this.$refs
         const imgs = articleMain.getElementsByTagName('img')
@@ -184,6 +222,15 @@ export default {
         this.article.attitude = -1
       }
       this.isLikeLoading = false
+    },
+    // 发布评论成功
+    postCommentSuccess (data) {
+      this.$bus.$emit('addComment', data)
+      this.isPostShow = false
+      this.commentsCount += 1
+    },
+    changeReplyNum () {
+      this.replyInfo.reply_count += 1
     }
   }
 }
@@ -253,6 +300,7 @@ export default {
     right: 0;
     overflow-x: hidden;
     overflow-y: auto;
+    background-color: #fff;
     .article-title {
       padding: 24px 15px;
       font-size: 20px;
