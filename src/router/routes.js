@@ -39,5 +39,10 @@ export default [
     path: '/article/:art_id',
     name: 'article',
     component: () => import('@/views/article/index.vue')
+  },
+  {
+    path: '/user/profile',
+    name: 'userProfile',
+    component: () => import('@/views/user-profile/index.vue')
   }
 ]

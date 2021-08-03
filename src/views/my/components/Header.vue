@@ -13,7 +13,7 @@
           />
           <span class="username">{{currentUser.name}}</span>
         </div>
-        <van-button type="default" size="mini" round>编辑资料</van-button>
+        <van-button type="default" size="mini" round @click="editProfile">编辑资料</van-button>
       </div>
       <van-grid :border="false">
         <van-grid-item text="头条">
@@ -65,6 +65,10 @@ export default {
     async handleGetCurrentUser () {
       const res = await getCurrentUser()
       this.currentUser = res.data
+    },
+    // 编辑资料
+    editProfile () {
+      this.$router.push('/user/profile')
     }
   }
 }
