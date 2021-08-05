@@ -1,7 +1,7 @@
 <template>
   <div class="cell-nav-container">
     <van-cell title="消息通知" is-link to="/" />
-    <van-cell title="小智同学" is-link to="/" />
+    <van-cell title="小智同学" is-link to="/user/chat" />
     <van-button
       type="default"
       block

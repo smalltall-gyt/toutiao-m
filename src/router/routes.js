@@ -44,5 +44,10 @@ export default [
     path: '/user/profile',
     name: 'userProfile',
     component: () => import('@/views/user-profile/index.vue')
+  },
+  {
+    path: '/user/chat',
+    name: 'userChat',
+    component: () => import('@/views/user-chat/index.vue')
   }
 ]
