@@ -43,6 +43,7 @@ import { set, get } from '@/utils/localStorage'
 import { mapState } from 'vuex'
 
 export default {
+  name: 'SearchIndex',
   components: {
     SearchSuggestion,
     HistorySearch,

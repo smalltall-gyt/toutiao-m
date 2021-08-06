@@ -72,7 +72,7 @@
         class="article-main markdown-body"
         v-html="article.content">
       </div>
-      <CommentList :source="$route.params.art_id" @changeCount="commentsCount = $event"/>
+      <CommentList :source="$route.params.art_id || article.art_id" @changeCount="commentsCount = $event"/>
     </div>
     <div class="footer">
       <van-button round type="default" class="write-comment-btn" @click="isPostShow=true">写评论</van-button>

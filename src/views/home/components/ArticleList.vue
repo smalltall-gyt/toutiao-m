@@ -1,5 +1,5 @@
 <template>
-  <div class="article-list-container">
+  <div class="article-list-container" ref="articleList">
     <van-pull-refresh
     v-model="refreshing"
     @refresh="onRefresh"
@@ -22,6 +22,7 @@
 import { getArticles } from '@/api/home'
 import { Toast } from 'vant'
 import ArticleItem from '@/components/ArticleItem.vue'
+import debounce from '@/utils/debounce'
 
 export default {
   components: {
@@ -33,13 +34,25 @@ export default {
       required: true
     }
   },
+  activated () {
+    const { articleList } = this.$refs
+    articleList.scrollTop = this.scrollTop
+  },
+  mounted () {
+    const { articleList } = this.$refs
+    const debounceFunc = debounce(() => {
+      this.scrollTop = articleList.scrollTop
+    }, 300)
+    articleList.addEventListener('scroll', debounceFunc, false)
+  },
   data () {
     return {
       list: [],
       loading: false,
       finished: false,
       refreshing: false,
-      pre_timestamp: null
+      pre_timestamp: null,
+      scrollTop: 0
     }
   },
   methods: {

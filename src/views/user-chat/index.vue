@@ -91,7 +91,6 @@ export default {
           const { messageWrapper } = this.$refs
           messageWrapper.querySelector('.van-cell:last-of-type').scrollIntoView()
         })
-        // messageWrapper.querySelector('.van-cell:last-of-type').scrollIntoView()
       }, Math.floor(Math.random() * (5000 - 1000) + 1000))
     }
   }
