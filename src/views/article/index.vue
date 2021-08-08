@@ -1,7 +1,7 @@
 <template>
   <div class="article-container">
     <div class="header">
-      <div class="left-icon" @click="$router.back()">
+      <div class="left-icon" @click="$router.push('/')">
         <i class="icon icon-youjiantou"></i>
       </div>
       <div class="title" v-if="titleIsShow">

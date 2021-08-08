@@ -63,7 +63,6 @@ export default {
         offset: this.offset,
         limit: this.limit
       })
-      console.log(res)
       this.comments.push(...res.data.results)
       this.loading = false
       this.total = res.data.total_count

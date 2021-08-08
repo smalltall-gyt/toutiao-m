@@ -55,12 +55,19 @@ export default {
   },
   created () {
     // 获取当前用户信息
-    this.handleGetCurrentUser()
+    if (this.user) {
+      this.handleGetCurrentUser()
+    }
   },
   methods: {
     toLogin () {
       console.log(1)
-      this.$router.push('/login')
+      this.$router.push({
+        name: 'login',
+        query: {
+          redirect: '/my'
+        }
+      })
     },
     async handleGetCurrentUser () {
       const res = await getCurrentUser()

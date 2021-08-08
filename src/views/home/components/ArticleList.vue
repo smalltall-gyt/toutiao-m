@@ -92,7 +92,6 @@ export default {
       } else {
         this.pre_timestamp = data.data.pre_timestamp
       }
-      console.log(data)
     }
   }
 }

@@ -67,7 +67,6 @@ export default {
           art_id: this.article.art_id
         }
       })
-      console.log(this.article)
     }
   }
 }

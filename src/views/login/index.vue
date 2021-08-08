@@ -116,7 +116,7 @@ export default {
           // 清空缓存
           this.$store.commit('user/removeCachePages', 'LayOutIndex')
           // 清空缓存后返回页面就需要重新加载
-          this.$router.back()
+          this.$router.push(this.$route.query.redirect || '/')
           this.$store.commit('user/setUser', res.data)
           Toast.success('登录成功')
         }
